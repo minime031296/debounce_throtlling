@@ -1,0 +1,24 @@
+#search-movie {
+   box-shadow : 12px 12px 2px 1px rgba(0, 0, 255, .2)
+}
+
+#search-btn {
+    transform:translateX(-65px);
+    height : 40px;
+}
+#search-input {
+    margin : 0px;
+    padding-left: 10px;
+    padding-top : 20px;
+    width: 30em;
+
+}
+
+#container {
+   margin-left : 200px;
+   margin-top : 100px;
+}
+
+.img1 {
+    width : 100px;
+}

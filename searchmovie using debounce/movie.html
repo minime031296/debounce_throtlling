@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./movie.css">
+    <title>movie search</title>
+</head>
+<body>
+    <h1 id="search-movie">SEARCH MOVIE</h1>
+    <input type="text" placeholder="movie name eg:ghost in shell , teen wolf , Batman " oninput="debounce(MakeApiCall, 1000)" id="search-input" />
+    <button id="search-btn">Search</button>
+
+    <img src="https://m.media-amazon.com/images/M/MV5BMThlNTk3YzMtOTZjMi00M2NiLTg1NTgtYThiYzE2MDFmMDUwXkEyXkFqcGdeQXVyNzA5NjUyNjM@._V1_SX300.jpg" class="img1">
+    <img src="https://m.media-amazon.com/images/M/MV5BZWQ0OTQ3ODctMmE0MS00ODc2LTg0ZTEtZWIwNTUxOGExZTQ4XkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_SX300.jpg" class="img1">
+    <img src="https://m.media-amazon.com/images/M/MV5BMTQ3ODY4NzYzOF5BMl5BanBnXkFtZTgwNjI3OTE4MDE@._V1_SX300.jpg" class="img1">
+    <div id="container">result</div>
+</body>
+</html>
+<script src="./movie.js"></script>
+
+

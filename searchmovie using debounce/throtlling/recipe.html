@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debouncing & Throttling</title>
+</head>
+<body>
+    <input type="text" id="search-input" oninput="debounceAndThrottle(MakeApiCall, 1000)">
+    <button onclick="Show()">Show</button>
+
+    <div id="container"></div>
+
+    <script>
+        let URL = "https://www.themealdb.com/api/json/v1/1/search.php?s=chicken";
+
+        async function fetchRecipe(query) {
+            try {
+                let response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`);
+                let data = await response.json();
+                return data.meals || [];
+            } catch (error) {
+                console.error(error);
+                return [];
+            }
+        }
+
+        function debounce(func, delay) {
+            let timerID;
+            return function () {
+                clearTimeout(timerID);
+                timerID = setTimeout(function () {
+                    func.apply(this, arguments);
+                }, delay);
+            };
+        }
+
+        function throttle(func, limit) {
+            let inThrottle;
+            return function () {
+                const args = arguments;
+                if (!inThrottle) {
+                    func.apply(this, args);
+                    inThrottle = true;
+                    setTimeout(() => (inThrottle = false), limit);
+                }
+            };
+        }
+
+        const debounceAndThrottle = throttle(debounce(MakeApiCall, 1000), 2000);
+
+        async function MakeApiCall() {
+            let search_input = document.getElementById("search-input").value.trim();
+
+            console.log("MAKE AN API CALL", search_input);
+
+            if (search_input !== "") {
+                let recipes = await fetchRecipe(search_input);
+                Show(recipes);
+            }
+        }
+
+        function Show(recipes) {
+            let cont = document.getElementById("container");
+            cont.innerHTML = '';
+
+            if (recipes.length === 0) {
+                cont.innerHTML = "<p>No recipes found</p>";
+                return;
+            }
+
+            recipes.forEach(recipe => {
+                let div = document.createElement("div");
+                div.id = "_box0";
+
+                let title = document.createElement("h3");
+                title.innerText = recipe.strMeal;
+
+                let category = document.createElement("p");
+                category.innerText = `Category: ${recipe.strCategory}`;
+
+                let instructions = document.createElement("p");
+                instructions.innerText = `Instructions: ${recipe.strInstructions}`;
+
+                div.append(title, category, instructions);
+                cont.appendChild(div);
+            });
+
+            console.log("Button clicked");
+        }
+    </script>
+</body>
+</html>
